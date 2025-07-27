@@ -13,13 +13,13 @@ def get_ors_api_key(state: dict = None) -> str:
         st.secrets.get("ORS_API_KEY", "")
     )
 
-def geocode_location(location: str, api_key: str):
-    if not api_key:
+def geocode_location(location: str, ors_api_key: str):
+    if not ors_api_key:
         raise ValueError("OpenRouteService API key is missing.")
 
     url = "https://api.openrouteservice.org/geocode/search"
     params = {
-        "api_key": api_key,
+        "api_key": ors_api_key,
         "text": location,
         "size": 1
     }
@@ -40,7 +40,7 @@ def geocode_location(location: str, api_key: str):
 def optimize_route(state: dict) -> dict:
     from_location = "Mumbai"
     to_location = state.get("parsed_order", {}).get("destination", "")
-    api_key = get_ors_api_key(state)
+    ors_api_key = get_ors_api_key(state)
 
     if not to_location:
         return {
@@ -50,8 +50,8 @@ def optimize_route(state: dict) -> dict:
             "route_coords": []
         }
 
-    from_coords = geocode_location(from_location, api_key)
-    to_coords = geocode_location(to_location, api_key)
+    from_coords = geocode_location(from_location, ors_api_key)
+    to_coords = geocode_location(to_location, ors_api_key)
 
     if not from_coords or not to_coords:
         return {
@@ -62,7 +62,7 @@ def optimize_route(state: dict) -> dict:
         }
 
     headers = {
-        "Authorization": api_key,
+        "Authorization": ors_api_key,
         "Content-Type": "application/json"
     }
 
