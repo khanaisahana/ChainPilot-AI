@@ -61,11 +61,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 import streamlit as st
-# Get API key from Streamlit secrets first, fallback to .env
-openai_api_key = st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY"))
-
-llm = ChatOpenRouter(model_name="mistralai/mixtral-8x7b-instruct")
-print(openai_api_key)
+# llm = ChatOpenRouter(model_name="mistralai/mixtral-8x7b-instruct")
+llm = ChatOpenRouter("mistralai/mixtral-8x7b-instruct")
 from langchain_core.prompts import ChatPromptTemplate
 
 system_prompt = """You are an assistant that extracts order information from text.
