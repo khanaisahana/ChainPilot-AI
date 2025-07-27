@@ -197,7 +197,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Load OpenRouteService API Key securely
-ORS_API_KEY = os.getenv("ORS_API_KEY", st.secrets.get("ORS_API_KEY", ""))
+ORS_API_KEY = os.getenv("ORS_API_KEY") or st.secrets.get("ORS_API_KEY", "")
 
 def geocode_location(location: str):
     if not ORS_API_KEY:
