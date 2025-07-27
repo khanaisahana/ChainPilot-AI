@@ -111,11 +111,14 @@
 
 import os
 import requests
+import streamlit as st
+
+ORS_API_KEY = os.getenv("ORS_API_KEY", st.secrets.get("ORS_API_KEY", ""))
 
 def geocode_location(location: str):
     url = "https://api.openrouteservice.org/geocode/search"
     params = {
-        "api_key": os.environ.get("ORS_API_KEY"),
+        "api_key": ORS_API_KEY,
         "text": location,
         "size": 1
     }
@@ -142,7 +145,7 @@ def optimize_route(state: dict) -> dict:
         }
 
     headers = {
-        "Authorization": os.environ.get("ORS_API_KEY"),
+        "Authorization": ORS_API_KEY,
         "Content-Type": "application/json"
     }
 
