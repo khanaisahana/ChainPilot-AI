@@ -12,6 +12,14 @@ st.set_page_config(page_title="Multi-Agent Logistics Optimizer", layout="wide")
 st.sidebar.header("🔐 Authentication")
 api_key = st.sidebar.text_input("Enter your OpenRouter API Key", type="password")
 
+ors_api_key = st.secrets['ORS_API_KEY']
+if ors_api_key:
+    st.session_state["ORS_API_KEY"] = ors_api_key
+    os.environ["ORS_API_KEY"] = ors_api_key
+else:
+    st.sidebar.warning("Please enter your OpenRouteService API key in the Streamlit secrets.")
+
+
 # Store API key in session state and set environment variable
 if api_key:
     st.session_state["OPENROUTER_API_KEY"] = api_key
