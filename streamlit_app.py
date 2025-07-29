@@ -41,7 +41,8 @@ if st.button("🚀 Run Agents"):
             # final_state = graph.invoke({"order_text": order_input})
             final_state = graph.invoke({
                 "order_text": order_input,
-                "api_key": api_key   # pass it to the graph
+                "api_key": api_key,   # pass it to the graph
+                "ors_api_key": ors_api_key
                 })
 
 
