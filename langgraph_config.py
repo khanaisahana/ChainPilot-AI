@@ -23,7 +23,7 @@ class OrderState(TypedDict):
     issue_type: Optional[str]
     route_coords: Optional[List[Dict[str, float]]]
     api_key: Optional[str] 
-    # ors_api_key: Optional[str] 
+    ors_api_key: Optional[str] 
 
     # 🔍 Agent execution trace
     trace: Optional[List[Dict[str, str]]]
