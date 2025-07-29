@@ -95,7 +95,6 @@ def extract_order_info(state: dict):
     order_text = state["order_text"]
     # llm = ChatOpenRouter("mistralai/mixtral-8x7b-instruct", api_key=state.get("api_key"))
     llm = ChatOpenRouter("openrouter/claude-3-haiku", api_key=state.get("api_key"))
-    openrouter/claude-3-haiku
     chain = prompt | llm | StrOutputParser()
     response = chain.invoke({"order_text": order_text})
 
