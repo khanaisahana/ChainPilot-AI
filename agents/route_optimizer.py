@@ -8,7 +8,7 @@ load_dotenv()
 def get_ors_api_key(state: dict = None) -> str:
     # Priority: passed via state > .env > streamlit secrets
     return (
-        (state or {}).get("ors_api_key") or
+        state.get("ors_api_key") or
         os.getenv("ORS_API_KEY") or
         st.secrets.get("ORS_API_KEY", "")
     )
